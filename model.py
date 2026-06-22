@@ -227,8 +227,18 @@ def training_step(params, x, one_hot_targets, learning_rate):
     updated_params = sgd_update_params(params, grads, learning_rate)
     return updated_params, loss
 
-# Step 20 - train_mlp (not yet solved)
-# TODO: implement
+# Step 20 - train_mlp
+def train_mlp(params, x, one_hot_targets, learning_rate, num_epochs):
+    """Run num_epochs full-batch SGD updates and return the final params."""
+    
+    # Loop for the specified number of epochs
+    for epoch in range(num_epochs):
+        # training_step returns the new parameters and the current loss.
+        # We reassign 'params' to these new parameters so the next epoch builds on them!
+        params, loss = training_step(params, x, one_hot_targets, learning_rate)
+        
+    # After the loop finishes, return the fully trained parameters
+    return params
 
 # Step 21 - predict_classes (not yet solved)
 # TODO: implement
