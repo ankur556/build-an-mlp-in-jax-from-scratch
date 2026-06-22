@@ -173,8 +173,27 @@ def compute_param_grads(params, x, one_hot_targets):
     # We immediately call it with our inputs.
     return jax.grad(loss_fn_of_params)(params, x, one_hot_targets)
 
-# Step 18 - sgd_update_params (not yet solved)
-# TODO: implement
+# Step 18 - sgd_update_params
+import jax
+import jax.numpy as jnp
+
+def sgd_update_params(params, grads, learning_rate):
+    # We build a completely new list to avoid JAX immutability errors
+    updated_params = []
+    
+    # zip lets us step through the layers of params and grads simultaneously
+    for p_layer, g_layer in zip(params, grads):
+        
+        # Create a new dictionary for the updated layer parameters (W and b)
+        updated_layer = {
+            # theta_new = theta_old - (lr * gradient)
+            key: p_layer[key] - learning_rate * g_layer[key]
+            for key in p_layer.keys()
+        }
+        
+        updated_params.append(updated_layer)
+        
+    return updated_params
 
 # Step 19 - training_step (not yet solved)
 # TODO: implement
