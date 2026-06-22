@@ -48,8 +48,9 @@ def assign_class_labels(inputs, num_classes):
     # Convert to int32
     return labels.astype(jnp.int32)
 
-# Step 6 - one_hot_encode_labels (not yet solved)
-# TODO: implement
+# Step 6 - one_hot_encode_labels
+def one_hot_encode_labels(inputs, num_classes):
+     return jnp.eye(num_classes)[labels]
 
 # Step 7 - init_linear_layer (not yet solved)
 # TODO: implement
