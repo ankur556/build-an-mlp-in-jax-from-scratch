@@ -112,8 +112,13 @@ def mlp_forward(params, x):
     
     return logits
 
-# Step 13 - log_softmax_logits (not yet solved)
-# TODO: implement
+# Step 13 - log_softmax_logits
+def log_softmax_logits(logits):
+    # TODO: return the numerically stable log-softmax of logits along the last axis.
+    m = np.max(logits, axis=-1, keepdims=True)
+    shifted_logits = logits - m
+    log_sum_exp = np.log(np.sum(np.exp(shifted_logits), axis=-1, keepdims=True))
+    return shifted_logits - log_sum_exp
 
 # Step 14 - cross_entropy_loss (not yet solved)
 # TODO: implement
