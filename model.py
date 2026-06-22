@@ -22,8 +22,12 @@ def split_prng_key(key, num):
     # TODO: split `key` into `num` independent subkeys and return them as a (num, 2) array.
     return  jax.random.split(key,num)
 
-# Step 3 - sample_normal_matrix (not yet solved)
-# TODO: implement
+# Step 3 - sample_normal_matrix
+import jax
+import jax.numpy as jnp
+
+def sample_normal_matrix(key, shape):
+    return jax.random.normal(key,shape)
 
 # Step 4 - sample_input_features (not yet solved)
 # TODO: implement
