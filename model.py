@@ -37,8 +37,16 @@ def sample_input_features(key, batch_size, num_features):
     """Sample a (batch_size, num_features) standard-normal feature batch."""
     return jax.random.normal(key,(batch_size,num_features))
 
-# Step 5 - assign_class_labels (not yet solved)
-# TODO: implement
+# Step 5 - assign_class_labels
+import jax.numpy as jnp
+
+def assign_class_labels(inputs, num_classes):
+    # Use only the first num_classes columns of inputs
+    relevant_scores = inputs[:, :num_classes]
+    # Find the index of the max value along axis=1 (per row)
+    labels = jnp.argmax(relevant_scores, axis=1)
+    # Convert to int32
+    return labels.astype(jnp.int32)
 
 # Step 6 - one_hot_encode_labels (not yet solved)
 # TODO: implement
