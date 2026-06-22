@@ -147,8 +147,22 @@ def classification_accuracy(logits, labels):
     
     return accuracy
 
-# Step 16 - loss_fn_of_params (not yet solved)
-# TODO: implement
+# Step 16 - loss_fn_of_params
+import jax
+import jax.numpy as jnp
+
+def loss_fn_of_params(params, x, one_hot_targets):
+    """
+    Computes the scalar cross-entropy loss for the given parameters.
+    This function is structured specifically so jax.grad can differentiate it.
+    """
+    # 1. Run the forward pass to get the raw logits
+    logits = mlp_forward(params, x)
+    
+    # 2. Compute the stable cross-entropy loss using those logits
+    loss = cross_entropy_loss(logits, one_hot_targets)
+    
+    return loss
 
 # Step 17 - compute_param_grads (not yet solved)
 # TODO: implement
