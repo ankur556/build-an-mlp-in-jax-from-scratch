@@ -240,6 +240,16 @@ def train_mlp(params, x, one_hot_targets, learning_rate, num_epochs):
     # After the loop finishes, return the fully trained parameters
     return params
 
-# Step 21 - predict_classes (not yet solved)
-# TODO: implement
+# Step 21 - predict_classes
+import jax.numpy as jnp
+
+def predict_classes(params, x):
+    # 1. Get the raw scores (logits) for each class
+    logits = mlp_forward(params, x)
+    
+    # 2. Find the index of the highest score across the class dimension (axis=-1)
+    predictions = jnp.argmax(logits, axis=-1)
+    
+    # 3. Cast to int32 for a stable integer return type, as requested
+    return predictions.astype(jnp.int32)
 
