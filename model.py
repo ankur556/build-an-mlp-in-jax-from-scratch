@@ -120,8 +120,21 @@ def log_softmax_logits(logits):
     log_sum_exp = np.log(np.sum(np.exp(shifted_logits), axis=-1, keepdims=True))
     return shifted_logits - log_sum_exp
 
-# Step 14 - cross_entropy_loss (not yet solved)
-# TODO: implement
+# Step 14 - cross_entropy_loss
+import jax.numpy as jnp
+
+def cross_entropy_loss(logits, one_hot_targets):
+    # 1. Get the stable log-probabilities using your previous function
+    log_probs = log_softmax_logits(logits)
+    
+    # 2. Compute the cross-entropy for each example in the batch
+    # Formula: -sum(targets * log_probs) along the class dimension
+    example_losses = -jnp.sum(one_hot_targets * log_probs, axis=-1)
+    
+    # 3. Average the losses over the entire batch to get a single scalar
+    mean_loss = jnp.mean(example_losses)
+    
+    return mean_loss
 
 # Step 15 - classification_accuracy (not yet solved)
 # TODO: implement
