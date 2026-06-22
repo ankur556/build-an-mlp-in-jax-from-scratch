@@ -52,8 +52,11 @@ def assign_class_labels(inputs, num_classes):
 def one_hot_encode_labels(inputs, num_classes):
      return jnp.eye(num_classes)[labels]
 
-# Step 7 - init_linear_layer (not yet solved)
-# TODO: implement
+# Step 7 - init_linear_layer
+def init_linear_layer(key, in_dim, out_dim, scale=0.1):
+    W = scale * sample_normal_matrix(key, (in_dim, out_dim))
+    b = jnp.zeros((out_dim,))
+    return {'W': W, 'b': b}
 
 # Step 8 - init_mlp_params (not yet solved)
 # TODO: implement
